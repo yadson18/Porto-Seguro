@@ -4,7 +4,7 @@
 	require_once "../functions.php";
 	require_once "../classes/WebService.php";
 
-	$ws = WebService::getInstance();
+	$ws = WebService::getInstance(["cookie" => true]);
 	$values = [
 		"user" => $_POST["userName"],
 		"pass" => $_POST["userPassword"],

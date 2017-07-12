@@ -14,11 +14,6 @@
   	$content = fread($fpFile, $sizeFile);
   	fclose($fpFile);
 
-  	$ws = WebService::getInstance();
-	$values = [
-		"user" => $_POST["userName"],
-		"pass" => $_POST["userPassword"],
-		"path" => ""
-	];
+  	$ws = WebService::getInstance(["cookie" => true]);
 	$ws->sendFile($content, $_SESSION["loggedUser"]);
 ?>
