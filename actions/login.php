@@ -2,9 +2,9 @@
 	session_start();
 
 	require_once "../functions.php";
-	require_once "../classes/WebService.php";
+	require_once "../classes/Conn.php";
 
-	$ws = WebService::getInstance(["cookie" => true]);
+	$ws = new Conn();
 	$values = [
 		"user" => $_POST["userName"],
 		"pass" => $_POST["userPassword"],

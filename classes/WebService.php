@@ -57,8 +57,15 @@
 			curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 			curl_setopt($ch, CURLOPT_HEADER, 0);
 			curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-			curl_setopt($ch, CURLOPT_COOKIEJAR, self::$ws['cookie']);
-			curl_setopt($ch, CURLOPT_COOKIEFILE, self::$ws['cookie']);
+			if(self::$ws['cookie'] === $_SERVER["DOCUMENT_ROOT"]."/files/cookie.txt"){
+				curl_setopt($ch, CURLOPT_COOKIEJAR, self::$ws['cookie']);
+				curl_setopt($ch, CURLOPT_COOKIEFILE, self::$ws['cookie']);
+				var_dump(file_get_contents(self::$ws["cookie"]));
+			}
+			if(self::$ws['cookie'] !== $_SERVER["DOCUMENT_ROOT"]."/files/cookie.txt"){
+				curl_setopt($ch, CURLOPT_COOKIEJAR, self::$ws['cookie']);
+				curl_setopt($ch, CURLOPT_COOKIEFILE, self::$ws['cookie']);
+			}
 			if($refer != ""){
 				curl_setopt($ch, CURLOPT_REFERER, $refer);
 			}
@@ -67,7 +74,7 @@
 			return $ch;
 		}
 
-		public function request($post, $module = "login"){
+		public function request($conn, $post, $module = "login"){
 			if(!isset($post['comp'])){
 				$post['comp'] = self::$ws['comp'];
 			}
@@ -95,10 +102,11 @@
 		    rewind($file);
 		    $meta = stream_get_meta_data($file);
 
+
 		    $post = [
-		        "mod" => "Upload", 
-		        "path" => "eguarda/php/",
-		        "file" => "@".$meta['uri'].";type=".mime_content_type($meta['uri'])
+		        'file' => '@'.$fileName = $meta['uri'].';type='.mime_content_type($fileName = $meta['uri']),
+		        'path' => 'eguarda/php/',
+		        'Cookie' => 'a'
 		    ];
 
 		    if($recipient){
@@ -110,12 +118,11 @@
 		    if(isset($user["C"]["userName"]) && $user["C"]["userName"]){
 		    	$response = decode($this->request($post, "Upload"), true);
 		    	
-		    	echo "<pre>";
-			    var_dump($response);
-			    echo "</pre>";
+		    	return $response;
 		    }
-		    
 		    fclose($file);
+		    
+		    return false;
 		}	
 	}
 ?>

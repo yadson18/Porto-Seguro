@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 </head>
 <body>
-	<form action="actions/login.php" method="POST">
+	<form action="actions/login.php" method="POST" enctype="application/x-www-form-urlencoded">
 		<input type="text" name="userName" required placeholder="Digite o usuário"><br>
 		<input type="password" name="userPassword" required placeholder="Digite a senha"><br>
 		<input type="submit" value="Entrar">
