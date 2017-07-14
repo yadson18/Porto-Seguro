@@ -1,0 +1,10 @@
+#!/bin/bash
+# yadson20@hotmail.com
+#
+
+if [ $* == start ];
+then
+  dir=$(pwd; cd ..); 
+  cd $dir;
+  php -S localhost:9000
+fi

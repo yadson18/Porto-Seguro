@@ -1,0 +1,62 @@
+body{
+	background-color: #eee;
+	font-family: Trebuchet MS,'Exo 2',sans-serif;
+}
+#menu.navbar-default{
+	background-color: #00314b;
+	box-shadow: 0px 0px 15px 1px gray;
+	border: none;
+	border-radius: 0;
+	margin-bottom: 0;
+	border-bottom: solid 1px white;
+}
+#menu.navbar-default .navbar-nav > li a{
+	color: white;
+	font-size: 1.1em;
+	text-shadow: 0.5px 0.5px 0.5px gray;
+}
+#menu.navbar-default .navbar-nav > li a:hover{
+	text-shadow: 0px 0px 2px white;
+}
+#menu.navbar-default .navbar-header > .navbar-brand{
+	border-right: solid 1px; 
+	font-size: 1.3em;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0.5px 0.5px 0.5px gray;
+}
+.navbar-header button.navbar-toggle{
+	background-color: white;
+	border-color: white;
+	border-radius: 2px;
+}
+#login-content{
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:11;
+	width:100%;
+	height:100%;
+	min-height: 100%;
+  	display: -webkit-flex;
+  	display: flex;
+  	-webkit-align-items: center;
+  	align-items: center;
+}
+#login-content{
+	background-color: #eee;
+	filter: alpha(opacity=65);
+}
+#form-login{
+	box-shadow: 1.5px 1.5px 6px 1px gray;
+	background-color: white;
+	border-radius: 4px;
+	padding-top: 15px;
+}
+#form-login button{
+	font-size: 1.2em;
+} 
+.file {
+  visibility: hidden;
+  position: absolute;
+}
