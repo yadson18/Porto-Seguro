@@ -36,6 +36,7 @@
 
 
 		public function isNotAuthorized(){
+			Webservice::deleteCookie();
 			$this->sessionDestroy();
 		}
 

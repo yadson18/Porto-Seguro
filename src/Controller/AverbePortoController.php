@@ -6,28 +6,25 @@
 
 		public function sendFile(){
 			if($this->requestMethodIs("POST")){
-				var_dump($_FILES);
-	            /*$file = tmpfile();
+	            $file = tmpfile();
 	            fwrite($file, file_get_contents($_FILES['file']['name']));
 	            rewind($file);
 	            $meta = stream_get_meta_data($file);
 
-	            $upload = [
-	                'cookie' => getCookie(),
+	           	$result = $this->getWsConnection()->postRequest([
+	                'cookie' => $this->getWsConnection()->getCookie(),
 	                'file' => '@'.$fileName = $meta['uri'].';type='.mime_content_type($fileName = $meta['uri']),
 	                'comp' => 5,
 	                'mod' => 'Upload',
 	                'path' => 'eguarda/php/',
 	                'recipient' => ''
-	            ];
+	            ], true);
 
 	            echo "<pre>";
-	            var_dump($upload);
-	            var_dump(postRequest($upload, true));
+	            var_dump($result);
 	            echo "</pre>";
 
-	            fclose($file);*/
-            	//unlink('cookie.txt');	
+	            fclose($file);
 			}
 			$this->serializeData(["Title" => "Enviar Arqivo"]);
 		}
