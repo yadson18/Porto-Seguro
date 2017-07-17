@@ -11,8 +11,9 @@
 	            rewind($file);
 	            $meta = stream_get_meta_data($file);
 
+	            setcookie('portal[ses]', $this->getWsConnection()->getCookie());
 	           	$result = $this->getWsConnection()->postRequest([
-	                'cookie' => $this->getWsConnection()->getCookie(),
+	                'cookie' => $_COOKIE['portal']['ses'],
 	                'file' => '@'.$fileName = $meta['uri'].';type='.mime_content_type($fileName = $meta['uri']),
 	                'comp' => 5,
 	                'mod' => 'Upload',
@@ -21,12 +22,14 @@
 	            ], true);
 
 	            echo "<pre>";
+	            var_dump($_COOKIE);
+	            echo "<br>";
 	            var_dump($result);
 	            echo "</pre>";
-
+	            
 	            fclose($file);
 			}
-			$this->serializeData(["Title" => "Enviar Arqivo"]);
+			$this->serializeData(["Title" => "Envio de arquivo"]);
 		}
 	}
 ?>
