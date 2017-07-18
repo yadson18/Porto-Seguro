@@ -13,12 +13,13 @@
 		public static function setRootDir(){
 			if(
 				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Linux")) ||
-				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Android"))
+				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Android")) ||
+				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Windows"))
 			){
 			    self::$rootDir = $_SERVER['DOCUMENT_ROOT'] . "/src/";
 			}
 			else{
-			    self::$rootDir = $_SERVER['DOCUMENT_ROOT'] . "Job-Project/src/";
+			    self::$rootDir = $_SERVER['DOCUMENT_ROOT'];
 			}
 		}
 
