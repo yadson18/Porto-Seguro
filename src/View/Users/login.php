@@ -3,17 +3,17 @@
 		<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="message">
 			<?= Flash::showMessage() ?>
 		</div>
-		<form method="POST" action="/Users/login" enctype="x-www-form-urlencoded" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="form-login">
+		<form method="POST" action="/Users/login" enctype="multipart/form-data" class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12" id="form-login">
 			<div class="form-group">
 				<label>Usuário</label>
-				<input type="text" name="usuario" class="form-control" placeholder="Ex: marcos" required>
+				<input type="text" name="usuario" class="form-control" placeholder="Ex: 12345678910111" required>
 			</div>
 			<div class="form-group">
 				<label>Senha</label>
 			    <input type="password" name="senha" class="form-control" placeholder="Ex: ******" required>
 			</div>
 			<div class="form-group">
-			    <button type="submit" class="btn form-control btn-success input-lg">
+			    <button type="submit" class="btn form-control btn-success input-lg" id="login-btn">
 			    	Entrar <i class="fa fa-sign-in" aria-hidden="true"></i>
 				</button>
 			</div>

@@ -1,5 +1,16 @@
 <?php  
 	class UsersController extends Controller{
+		public static function authorized($method){
+			$methods = ["login", "logout"];
+			
+			if(!empty($methods)){
+				if(in_array($method, $methods)){
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public function login(){
 			if($this->requestMethodIs("POST")){
 				$result = $this->getWsConnection()->postRequest([

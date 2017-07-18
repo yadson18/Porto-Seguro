@@ -11,4 +11,16 @@ $(document).ready(function() {
 	$(".close").on("click", function(){
 		$("#message").empty();
 	});
+
+	$("#send-file-btn, #login-btn").on("click", function(){
+		if($(".file").val() !== ""){
+			$("#send-file-btn").attr("disabled", "disabled");
+		}
+		if(
+			($("#form-login input[name=usuario]").val() != "") &&
+			($("#form-login input[name=senha]").val() != "")
+		){
+			$("#login-btn").attr("disabled", "disabled");
+		}
+	});
 });

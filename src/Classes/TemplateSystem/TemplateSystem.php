@@ -5,6 +5,7 @@
     private static $templateToLoad;
     private static $instance;
     private static $sessionData;
+    private static $authorized;
 
     public function getData($index){
       if(Session::getCurrent()){
@@ -33,8 +34,9 @@
     }
 
     public static function classExists($controller, $method, $requestData, $template = null){
-        if(class_exists("{$controller}")){
-          if(strcmp($controller, "Controller") != 0){
+      if(class_exists("{$controller}")){
+        if(strcmp($controller, "Controller") != 0){
+          if($controller::authorized($method)){
             self::$instance = new $controller($requestData);
             if(is_callable([self::$instance, $method])){
               $value = self::$instance->$method();
@@ -53,6 +55,10 @@
               }
             }
           }
+          else{
+
+          }
+        }
         else if(
           (strcmp($controller, "Controller") == 0) && 
           (strcmp($method, "index") == 0)
@@ -65,7 +71,6 @@
             self::$instance->$method();
             self::setTemplate($template);
           }
-
         }
         else{
           self::setTemplate(null);

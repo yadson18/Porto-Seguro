@@ -18,7 +18,7 @@
 		?>
 	</head>
 	<body>
-		<?php if(!empty($this_->getData("Logged"))): ?>
+		<?php if($this_->getData("Title") != "Login"): ?>
 			<nav class="navbar navbar-default" id="menu">
 	  			<div class="container-fluid">
 		    		<div class="navbar-header">
@@ -74,7 +74,7 @@
 	  			</div>
 			</nav>
 		<?php endif; ?>
-		<?php if(!empty($this_->getData("Logged"))): ?>
+		<?php if($this_->getData("Title") != "Login"): ?>
 			<div id="content" class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-xs-12">
 		<?php else: ?>
 			<div id="content">

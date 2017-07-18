@@ -25,10 +25,8 @@ label{
 }
 #menu.navbar-default .navbar-header > .navbar-brand{
 	border-right: solid 1px; 
-	font-size: 1.3em;
 	color: white;
-	font-weight: bold;
-	text-shadow: 0.5px 0.5px 0.5px gray;
+	padding: 15px 38px;
 }
 #menu.navbar-default .navbar-header > .navbar-brand img{
 	position: relative; 
@@ -48,6 +46,9 @@ label{
 	position: absolute;
 	min-height: 92.4%;
 	height: 92.4%;
+}
+#menu-left div ul{
+	width: 100%;
 }
 #menu-left div ul li a{
 	color: white;
@@ -71,22 +72,36 @@ label{
 	background-color: #eee;
 	filter: alpha(opacity=65);
 }
-#form-send-file{
-	margin-top: 100px;
-	padding: 15px 20px;
+#send-file{
+	margin-top: 10%;
 }
-#form-login{
+#send-file-content{
+	padding: 15px 40px;
+	margin-bottom: 20px;
+}
+#form-login,
+#send-file-content{
 	box-shadow: 1.5px 1.5px 6px 1px gray;
 	background-color: white;
 	border-radius: 4px;
 	padding-top: 15px;
+}
+#send-file-header{
+	padding: 10px 10px 25px 10px;
+	font-size: 1.1em;
+	text-align: center;
+}
+#send-file-header b:nth-child(1){
+	color: #c94442;
 }
 #form-login button,
 #form-send-file .btn-success{
 	font-size: 1.2em;
 } 
 #message.col-md-4,
+#message.col-md-6,
 #message.col-sm-6,
+#message.col-sm-8,
 #message.col-xs-12{
 	padding-right: 0;
 	padding-left: 0;
@@ -97,7 +112,8 @@ label{
 }
 #presentation-box{
 	color: black;
-	margin-top: 50px;
+	margin-top: 5%;
+	margin-bottom: 20px;
 	box-shadow: 1px 1px 8px 1px gray;
 	background-color: white;
 }

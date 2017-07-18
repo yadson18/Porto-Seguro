@@ -5,7 +5,7 @@
 		</h3>
 		<div>
 			<h4 id="sub-title" class="text-center">Sistema AverbePorto</h4>
-			<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-10 col-md-offset-2 col-sm-10 col-sm-offset-2 col-xs-10 col-xs-offset-2">
 				<h4>Envio de arquivo</h4>
 				<ol id="presentation-body">
 				  <li>Clique em <b>Envio de arquivo</b> no menu lateral.</li>
