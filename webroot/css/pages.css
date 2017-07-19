@@ -67,24 +67,24 @@ label{
   	display: flex;
   	-webkit-align-items: center;
   	align-items: center;
-}
-#login-content{
-	background-color: #eee;
+  	background-color: #00314b;
 	filter: alpha(opacity=65);
 }
 #send-file{
 	margin-top: 10%;
 }
-#send-file-content{
-	padding: 15px 40px;
-	margin-bottom: 20px;
+#form-login{
+	box-shadow: 0px 0px 4px 1px gray;
+	background-color: #eee;
+	border-radius: 4px;
+	padding-top: 15px;
 }
-#form-login,
 #send-file-content{
 	box-shadow: 1.5px 1.5px 6px 1px gray;
 	background-color: white;
 	border-radius: 4px;
-	padding-top: 15px;
+	padding: 15px 40px;
+	margin-bottom: 20px;
 }
 #send-file-header{
 	padding: 10px 10px 25px 10px;
@@ -102,7 +102,10 @@ label{
 #message.col-md-6,
 #message.col-sm-6,
 #message.col-sm-8,
-#message.col-xs-12{
+#message.col-xs-12,
+#presentation-box.col-md-8,
+#presentation-box.col-sm-8,
+#presentation-box.col-xs-12{
 	padding-right: 0;
 	padding-left: 0;
 }
@@ -116,12 +119,6 @@ label{
 	margin-bottom: 20px;
 	box-shadow: 1px 1px 8px 1px gray;
 	background-color: white;
-}
-#presentation-box.col-md-8,
-#presentation-box.col-sm-8,
-#presentation-box.col-xs-12{
-	padding-left: 0;
-	padding-right: 0;
 }
 #title{
 	background-color: #00314b; 
@@ -177,4 +174,15 @@ label{
 	padding: 17px;
 	color: white;
 	transition: 0.1s;
+}
+#menu .open > a, 
+#menu .open > a:focus, 
+#menu .open > a:hover{
+	background-color: transparent;
+}
+
+#menu .dropdown-menu,
+ul.navbar-left li a:visited,
+#menu .dropdown-menu a:visited{
+	background-color: #00314b;
 }

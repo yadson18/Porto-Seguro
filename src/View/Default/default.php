@@ -44,11 +44,22 @@
 	        						<i class="fa fa-upload" aria-hidden="true"></i> Envio de arquivo
 	        					</a>
 	        				</li>
-	        				<li>
-	        					<a href="/Users/logout">
-	        						Sair <i class="fa fa-sign-out" aria-hidden="true"></i>
-	        					</a>
-	        				</li>
+	        				<li class="dropdown">
+					          	<a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					          		<?= strtolower($this_->getData('User')['name']) ?> 
+					          		<i class="fa fa-caret-down" aria-hidden="true"></i>
+					          	</a>
+					          	<ul class="dropdown-menu">
+					            	<li>
+					            		<a href="/Users/logout" class="hidden-xs">
+	        								Sair <i class="fa fa-sign-out" aria-hidden="true"></i>
+	        							</a>
+	        							<a href="/Users/logout" class="visible-xs">
+	        								<i class="fa fa-sign-out" aria-hidden="true"></i> Sair
+	        							</a>
+					            	</li>
+					          	</ul>
+					        </li>
 	      				</ul>
 	    			</div>
 	  			</div>

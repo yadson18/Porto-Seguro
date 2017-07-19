@@ -17,10 +17,18 @@
 
     public function fetchAll(){ 
       if(is_file(self::getTemplate())){
-        ob_start();
-        $this_ = $this;
-        include self::getTemplate();
-        return ob_get_clean();
+        if(
+          ($this->getData("Title") === "Login") && 
+          ($this->getData("Logged") === true)
+        ){
+          header("Location: /AverbePorto/index");
+        }
+        else{
+          ob_start();
+          $this_ = $this;
+          include self::getTemplate();
+          return ob_get_clean();
+        }
       }
     } 
 
