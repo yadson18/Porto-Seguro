@@ -1,6 +1,10 @@
 body{
 	background-color: #eee;
 	font-family: Trebuchet MS,'Exo 2',sans-serif;
+	height: 100%;
+}
+html{
+	height: 100%;
 }
 label{
 	color: #4f4f4f;
@@ -185,4 +189,9 @@ label{
 ul.navbar-left li a:visited,
 #menu .dropdown-menu a:visited{
 	background-color: #00314b;
+}
+#companie{
+	background-color: #00314b;
+	padding: 10px 10px 10px 10px;
+	color: white;
 }

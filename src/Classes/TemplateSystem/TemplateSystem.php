@@ -62,6 +62,9 @@
                 self::setTemplate("{$view[0]}/{$method}");
               }
             }
+            else{
+              self::$authorized = false;
+            }
           }
           else{
             self::$authorized = false;
