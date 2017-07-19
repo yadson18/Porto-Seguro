@@ -1,14 +1,9 @@
 <?php  
 	class UsersController extends Controller{
-		public static function authorized($method){
-			$methods = ["login", "logout"];
-			
-			if(!empty($methods)){
-				if(in_array($method, $methods)){
-					return true;
-				}
-			}
-			return false;
+		public static function authorized($method, $loggedUser){
+			$allowedMethods = ["login", "logout"];
+
+			return self::authorizedToAccess($method, $allowedMethods, $loggedUser);
 		}
 
 		public function login(){

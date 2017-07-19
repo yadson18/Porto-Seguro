@@ -1,4 +1,12 @@
 $(document).ready(function() {
+	function disableButton(button){
+		$(button).attr("disabled", "disabled");
+	}
+
+	function submitForm(form){
+		$(form).submit();
+	}
+
 	$(this).on("click", ".browse", function(){
 	  var file = $(this).parent().parent().parent().find(".file");
 	  file.trigger("click");
@@ -14,13 +22,15 @@ $(document).ready(function() {
 
 	$("#send-file-btn, #login-btn").on("click", function(){
 		if($(".file").val() !== ""){
-			$("#send-file-btn").attr("disabled", "disabled");
+			submitForm("#form-send-file");
+			disableButton("#send-file-btn");
 		}
 		if(
-			($("#form-login input[name=usuario]").val() != "") &&
+			($("#form-login input[name=usuario]").val() != "") && 
 			($("#form-login input[name=senha]").val() != "")
 		){
-			$("#login-btn").attr("disabled", "disabled");
+			submitForm("#form-login");
+			disableButton("#login-btn");
 		}
 	});
 });

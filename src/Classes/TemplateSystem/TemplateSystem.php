@@ -4,7 +4,6 @@
 
     private static $templateToLoad;
     private static $instance;
-    private static $sessionData;
     private static $authorized;
 
     public function getData($index){
@@ -36,7 +35,8 @@
     public static function classExists($controller, $method, $requestData, $template = null){
       if(class_exists("{$controller}")){
         if(strcmp($controller, "Controller") != 0){
-          if($controller::authorized($method)){
+          if($controller::authorized($method, self::getData("Logged"))){
+            self::$authorized = true;
             self::$instance = new $controller($requestData);
             if(is_callable([self::$instance, $method])){
               $value = self::$instance->$method();
@@ -56,13 +56,14 @@
             }
           }
           else{
-
+            self::$authorized = false;
           }
         }
         else if(
           (strcmp($controller, "Controller") == 0) && 
           (strcmp($method, "index") == 0)
         ){
+          self::$authorized = true;
           $values = explode("/", $template);  
           $controller = "{$values[0]}Controller";
           $method = $values[1];
@@ -73,8 +74,8 @@
           }
         }
         else{
+          self::$authorized = false;
           self::setTemplate(null);
-          echo "Erro, Controller ou View não encontrada.";
           exit();
         }
         return true;
@@ -110,19 +111,27 @@
           $requestData = (object) $_POST;
           
           if(!self::classExists($controller, $method, $requestData)){
-            echo "Erro, método POST, Controller ou View não encontrada.";
+            self::$authorized = false;
           }
         }
         else{
           $requestData = (object) $_GET;
           self::$instance = NULL;
           if(!self::classExists($controller, $method, $requestData, $template)){
-            echo "Erro, método GET, Controller ou View não encontrada.";
+            self::$authorized = false;
           }
-          $this_ = $this;
-          include "src/View/Default/default.php";         
-          exit();
-          call_user_func_array(array(self::$instance, $method), $args);
+          if(self::$authorized === true){ 
+            $this_ = $this;
+            include "src/View/Default/default.php";         
+            exit();
+            call_user_func_array(array(self::$instance, $method), $args);
+          }
+          else{
+            $this->daniedAccess(
+              "Acesso negado, você não está autorizado a acessar esta página, 
+              confira se a URL foi digitada corretamente, ou se o usuário está logado."
+            );
+          }
         }
       }
     }

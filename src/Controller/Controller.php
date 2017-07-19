@@ -11,6 +11,20 @@
 			$this->webservice = new Webservice();
 		}
 
+		public function authorizedToAccess($method, $methods, $loggedUser){
+			if($loggedUser === true){
+				return true;
+			}
+			else{
+				if(is_array($methods) && !empty($methods)){
+					if(in_array($method, $methods)){
+						return true;
+					}	
+				}
+			}
+			return false;
+		}
+
 		public function getWsConnection(){
 			return $this->webservice;
 		}

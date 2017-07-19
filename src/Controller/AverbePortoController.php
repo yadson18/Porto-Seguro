@@ -1,14 +1,9 @@
 <?php  
 	class AverbePortoController extends Controller{
-		public static function authorized($method){
-			$methods = ["index", "sendFile"];
-			
-			if(!empty($methods)){
-				if(in_array($method, $methods)){
-					return true;
-				}
-			}
-			return false;
+		public static function authorized($method, $loggedUser){
+			$allowedMethods = [];
+
+			return self::authorizedToAccess($method, $allowedMethods, $loggedUser);
 		}
 
 		public function index(){

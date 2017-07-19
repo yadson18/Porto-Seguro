@@ -8,21 +8,10 @@
       		echo "<link rel='stylesheet' type='text/css' href='/webroot/css/$cssName'>";
     	}
 
-    	/*public function input($type, $options){
-    		$inputTypes = ["date"];
-
-    		foreach($inputTypes as $types){
-    			if(strcmp($types, $type) === 0){
-    				$input = "<input type='{$type}' ";
-    				foreach($options as $option){
-    					$input .= "{$option} ";
-    				}
-    				return $input;
-    			}
-    			else{
-    				return false;
-    			}
-    		}
-    	}*/
+        public function daniedAccess($message){
+            ob_start();
+            include "src/View/FlashMessageTemplates/daniedAccess.php";
+            echo ob_get_clean();
+        }
 	}
 ?>

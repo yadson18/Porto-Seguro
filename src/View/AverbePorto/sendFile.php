@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <button class="form-control btn btn-success input-lg" id="send-file-btn">
+                <button class="form-control btn btn-success input-lg" id="send-file-btn" type="submit">
                     Enviar <i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
             </div>
