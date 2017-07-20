@@ -18,40 +18,48 @@
 			return false;
 		}
 
-		public function select($colunas, $tabela, $condicao = null, $condicaoValues = null){
+		public function select($columns, $table, $condition = null, $conditionValues = null){
 			if($this->getConnection()){
-				if((strcmp($condicao, null) == 0) && (strcmp($condicaoValues, null) == 0)){ 
-					$query = $this->getConnection()->query("SELECT {$colunas} FROM {$tabela}");
-					
-					return $query->fetchAll(PDO::FETCH_ASSOC);
-				}
-				$query = $this->getConnection()->prepare("SELECT {$colunas} FROM {$tabela} {$condicao}");
-				$query->execute($condicaoValues);
+				if(is_string($columns) && is_string($table)){
+					if(empty($condition) && empty($conditionValues)){
+						$query = $this->getConnection()->query("SELECT {$columns} FROM {$table}");
 						
-				return $query->fetchAll(PDO::FETCH_ASSOC);
+						return $query->fetchAll(PDO::FETCH_ASSOC);
+					}
+					else{
+						if(is_string($condition) && is_string($conditionValues)){
+							$query = $this->getConnection()->prepare(
+								"SELECT {$columns} FROM {$table} {$condition}"
+							);
+							$query->execute($conditionValues);
+						
+							return $query->fetchAll(PDO::FETCH_ASSOC);
+						}
+					}
+				}
 			}
 			return false;
 		}
 
-		public function insert($tabela, $colunas, $valores){
+		public function insert($table, $columns, $values){
 			if($this->getConnection()){
 				$columnFormat = "";
 				$column = "";
 				
-				for($i = 0; $i < sizeof($colunas); $i++){
-					if($i < (sizeof($colunas) - 1)){
-						$columnFormat .= ":" . $colunas[$i] . ", ";
-						$column .= $colunas[$i] . ", ";
+				for($i = 0; $i < sizeof($columns); $i++){
+					if($i < (sizeof($columns) - 1)){
+						$columnFormat .= ":" . $columns[$i] . ", ";
+						$column .= $columns[$i] . ", ";
 					}
 					else{
-						$columnFormat .= ":" . $colunas[$i];
-						$column .= $colunas[$i];
+						$columnFormat .= ":" . $columns[$i];
+						$column .= $columns[$i];
 					}
 				}
-				$query = "INSERT INTO {$tabela}({$column}) VALUES({$columnFormat})";
+				$query = "INSERT INTO {$table}({$column}) VALUES({$columnFormat})";
 				$query = $this->getConnection()->prepare($query);
-				for($j = 0; $j < sizeof($colunas); $j++){
-					$query->bindParam(":" . $colunas[$j], $valores[$j], PDO::PARAM_STR);
+				for($j = 0; $j < sizeof($columns); $j++){
+					$query->bindParam(":" . $columns[$j], $values[$j], PDO::PARAM_STR);
 				} 
 				$query->execute();
 				return true;

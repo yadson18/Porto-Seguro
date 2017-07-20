@@ -12,13 +12,18 @@
 
 		public function sendFile(){
 			if($this->requestMethodIs("POST")){
-	            $fileName = $_FILES["file"]["name"];
-	            $fileType = $_FILES["file"]["type"];
-	            $fileSize = $_FILES["file"]["size"];
-	            $file = new CURLFile($fileName, $fileType, "file");
+				$file = tmpfile();
+				fwrite($file, file_get_contents($_FILES["file"]["tmp_name"]));
+				rewind($file);
+				$meta = stream_get_meta_data($file);
+
+	            $fileName = $meta["uri"];
+	            $fileType = mime_content_type($meta["uri"]);
+	            $fileSize = filesize($meta["uri"]);
+	            $postFile = new CURLFile($fileName, $fileType, "file");
 
 	           	$result = $this->getWsConnection()->postRequest([
-	                "file" => $file,
+	                "file" => $postFile,
 	                "fileSize" => $fileSize,
 	                "comp" => 5,
 	                "mod" => "Upload",
@@ -26,8 +31,8 @@
 	                "recipient" => ""
 	            ], true);
 
-	            fclose($file);
-	            var_dump($result);
+	            fclose($newFile);
+
 	            if(!empty($result)){
 	            	if(isset($result["success"]) && $result["success"] === 1){
 	            		if(isset($result["S"]) && !empty($result["S"])){

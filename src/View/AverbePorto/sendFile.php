@@ -16,7 +16,7 @@
         </p>
         <form id="form-send-file" method="POST" action="/AverbePorto/sendFile" enctype="multipart/form-data">
             <div class="form-group">
-                <input type="file" name="file"  class="file" required>
+                <input type="file" name="file" class="file" required>
                 <div class="input-group col-xs-12">
                     <span class="input-group-addon">
                         <i class="fa fa-file-o" aria-hidden="true"></i>
