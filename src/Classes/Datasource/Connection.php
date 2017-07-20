@@ -1,4 +1,9 @@
 <?php  
+	/* 
+	 * A classe Connection, serve para conectar-se a vários tipos de bancos de dados 
+	 * através do PDO, tais como MySql, Firebird, PostgreSQL...
+	 * Para a lista completa de bancos de dados suportados, consulte o manual do PHP.
+	 */
 	abstract class Connection{
 		private static $connection;
 

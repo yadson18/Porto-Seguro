@@ -1,6 +1,9 @@
 #!/bin/bash
-# yadson20@hotmail.com
+# yadson20@gmail.com
 #
+
+# Para iniciar o servidor de testes, na raiz do projeto digite na linha de comando
+# bin/server start
 
 if [ $* == start ];
 then
