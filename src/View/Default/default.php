@@ -5,17 +5,15 @@
 		<link rel="icon" type="image/x-icon" href="/webroot/images/logo-icone.jpg">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<?php  
-			$this_->css("bootstrap.min.css");
-			$this_->css("pages.css");
-			$this_->css("font-awesome.min.css");
+		<?= $this_->css("bootstrap.min.css") ?>
+		<?= $this_->css("pages.css") ?>
+		<?= $this_->css("font-awesome.min.css") ?>
 
-			$this_->script("jquery-3.2.1.min.js");
-			$this_->script("jquery.price_format.min.js");
-			$this_->script("inputMask.js");
-			$this_->script("bootstrap.min.js");
-			$this_->script("pages.js");
-		?>
+		<?= $this_->script("jquery-3.2.1.min.js") ?>
+		<?= $this_->script("jquery.price_format.min.js") ?>
+		<?= $this_->script("inputMask.js") ?>
+		<?= $this_->script("bootstrap.min.js") ?>
+		<?= $this_->script("pages.js") ?>
 	</head>
 	<body>
 		<?php if($this_->getData("Title") != "Login"): ?>

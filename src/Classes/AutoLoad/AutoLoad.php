@@ -1,9 +1,10 @@
 <?php 
-	//A classes AutoLoad serve para carregar classes automaticamente no projeto.
+	//A classe AutoLoad serve para carregar classes automaticamente no projeto.
 	abstract class AutoLoad{
 		/* 
 		 * Para este atributo, é necessário um array com os diretórios onde encontram-se todas
-		 * as classes do projeto a partir do diretório src. 
+		 * as classes do projeto a partir do diretório src ou do diretório especificado pelo 
+		 * método setRootDir. 
 		 */
 		private static $classPaths = [
 			"Classes/Datasource", 
@@ -16,19 +17,18 @@
 		private static $rootDir;
 
 		/* 
-		 * Este método checa o sistema operacional do usuário e salva o diretório onde 
-		 * devem ser buscadas as classes, em uma variável estática. 
+		 * Este método salva em uma variável estática, o diretório raiz onde devem ser 
+		 * carregadas as classes.
+		 * (string) rootDir, diretório raiz onde devem ser carregadas as classes.
 		 */
-		public static function setRootDir(){
-			if(
-				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Linux")) ||
-				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Android")) ||
-				(strpos("[".$_SERVER['HTTP_USER_AGENT']."]", "Windows"))
-			){
-			    self::$rootDir = $_SERVER['DOCUMENT_ROOT'] . "/src/";
+		public static function setRootDir($rootDir){
+			if(!empty($rootDir) && is_string($rootDir)){
+				if(is_dir($rootDir)){
+					self::$rootDir = $rootDir;
+				}
 			}
 			else{
-			    self::$rootDir = $_SERVER['DOCUMENT_ROOT'];
+				self::$rootDir = $_SERVER['DOCUMENT_ROOT'] . "/src/";
 			}
 		}
 
@@ -37,9 +37,14 @@
 			return self::$rootDir;
 		}
 
-		// Este método carrega as classes automaticamente quando for necessário.
-		public static function loadClasses(){
-			self::setRootDir();
+		/* 
+		 * Este método carrega as classes automaticamente quando for necessário,
+		 * (string) rootDir, diretório raiz onde devem ser carregadas as classes (opcional),
+		 * caso não seja passado nenhum valor, o diretório default para carregamento das
+		 * classes, será o src.
+		 */
+		public static function loadClasses($rootDir = null){
+			self::setRootDir($rootDir);
 			spl_autoload_register(function($class_name){
 				foreach(self::$classPaths as $path){
 					if(
