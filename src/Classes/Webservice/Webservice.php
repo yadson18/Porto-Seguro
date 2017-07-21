@@ -1,17 +1,21 @@
 <?php
     class Webservice{
+        public $cookiePath;
+
+        public function __construct(){
+            $this->cookiePath = $_SERVER["DOCUMENT_ROOT"] . "/webroot/files/cookie.txt";
+        }
+
         public function cookie(){
-            $cookie = "webroot/files/cookie.txt";
-            
-            if(is_file($cookie)){
-                if(is_writable($cookie)){
+            if(is_file($this->cookiePath)){
+                if(is_writable($this->cookiePath)){
                     return true;
                 }
                 return false;
             }
             else{
-                if(touch($cookie)){
-                    if(is_writable($cookie)){
+                if(touch($this->cookiePath)){
+                    if(is_writable($this->cookiePath)){
                         return true;
                     }
                     return false;
@@ -21,7 +25,7 @@
         }
 
         public function getCookie(){
-            return substr(strrchr(file_get_contents("webroot/files/cookie.txt"), "portal[ses]"), 12, 32);
+            return substr(strrchr(file_get_contents($this->cookiePath), "portal[ses]"), 12, 32);
         }
 
         public function connection($useCookie){
@@ -33,13 +37,13 @@
             curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
             if($useCookie === true){
                 if($this->cookie()){
-                    curl_setopt($ch, CURLOPT_COOKIEJAR, "webroot/files/cookie.txt");
-                    curl_setopt($ch, CURLOPT_COOKIEFILE, "webroot/files/cookie.txt");
+                    curl_setopt($ch, CURLOPT_COOKIEJAR,  $this->cookiePath);
+                    curl_setopt($ch, CURLOPT_COOKIEFILE,  $this->cookiePath);
                 }
                 else{
-                    $cookie = tempnam(sys_get_temp_dir(), "eg_");
-                    curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
-                    curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
+                    $this->cookiePath = tempnam(sys_get_temp_dir(), "eg_");
+                    curl_setopt($ch, CURLOPT_COOKIEJAR, $this->cookiePath);
+                    curl_setopt($ch, CURLOPT_COOKIEFILE, $this->cookiePath);
                 }
             }
             curl_setopt($ch, CURLOPT_REFERER, "");
@@ -63,11 +67,16 @@
             $response = curl_exec($connection);
             curl_close($connection);
 
+            if($post["mod"] === "Upload"){
+                $this->deleteCookie();
+            }
             return json_decode($response, true);
         }
 
-        public static function deleteCookie(){
-            unlink("webroot/files/cookie.txt");   
+        public function deleteCookie(){
+            if(is_file($this->cookiePath)){
+                unlink($this->cookiePath);   
+            }
         }
     }
 ?>

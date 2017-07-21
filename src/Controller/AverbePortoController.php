@@ -22,16 +22,22 @@
 	            $fileSize = filesize($meta["uri"]);
 	            $postFile = new CURLFile($fileName, $fileType, "file");
 
-	           	$result = $this->getWsConnection()->postRequest([
-	                "file" => $postFile,
+	            $webservice = new Webservice();
+	            $user = $_SESSION[Session::getId()]["User"];
+				$webservice->postRequest([
+					"user" => $user["userName"],
+					"pass" => base64_decode($user["p"]),
+					"mod" => "login",
+					"comp" => 5
+				], true);
+	            $result = $webservice->postRequest([
+	            	"file" => $postFile,
 	                "fileSize" => $fileSize,
 	                "comp" => 5,
 	                "mod" => "Upload",
 	                "path" => "eguarda/php/",
 	                "recipient" => ""
 	            ], true);
-
-	            fclose($newFile);
 
 	            if(!empty($result)){
 	            	if(isset($result["success"]) && $result["success"] === 1){

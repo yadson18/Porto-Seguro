@@ -8,16 +8,18 @@
 
 		public function login(){
 			if($this->requestMethodIs("POST")){
-				$result = $this->getWsConnection()->postRequest([
+				$webservice = new Webservice();
+				$result = $webservice->postRequest([
 					"mod" => "login",
 					"comp" => 5,
 					"user" => $_POST["usuario"],
 					"pass" => $_POST["senha"]
-				], true);
+				], false);
 
 				if(isset($result["success"]) && isset($result["C"])){
 					if($result["success"] == 1 && !empty($result["C"])){
 						$this->isAuthorized();
+						$result["C"]["p"] = base64_encode($_POST["senha"]);
 						$this->serializeData(["User" => $result["C"]]);
 						return $this->redirectTo(["controller" => "AverbePorto"]);
 					}
@@ -42,7 +44,6 @@
 
 
 		public function isNotAuthorized(){
-			Webservice::deleteCookie();
 			$this->sessionDestroy();
 		}
 

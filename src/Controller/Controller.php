@@ -2,14 +2,8 @@
 	session_start();
 	
 	class Controller{
-		private $webservice;
-
 		use Session;
 		use Flash;
-
-		public function __construct(){
-			$this->webservice = new Webservice();
-		}
 
 		public function authorizedToAccess($method, $methods, $loggedUser){
 			if($loggedUser === true){
@@ -23,10 +17,6 @@
 				}
 			}
 			return false;
-		}
-
-		public function getWsConnection(){
-			return $this->webservice;
 		}
 
 		public function redirectTo($url){
