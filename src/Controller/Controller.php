@@ -2,11 +2,47 @@
 	session_start();
 	
 	class Controller{
-		use Session;
-		use Flash;
+		public $templateSystem;
 
-		public function authorizedToAccess($method, $methods, $loggedUser){
-			if($loggedUser === true){
+		public function __construct($requestData, $templateSystem){
+			$this->templateSystem = $templateSystem;
+		}
+
+		public function setViewVars($data){
+			if(!empty($data) && is_array($data)){
+				$this->templateSystem->setViewVars($data);
+			}
+		}
+
+		public function flash($method, $message){
+			$methods = ["Error", "Success", "SuccessModal", "Warning"];
+
+			if(in_array($method, $methods) && !empty($message)){
+				$method = "flash{$method}";
+				$this->templateSystem->$method($message);
+				return true;
+			}
+			return false;
+		}
+
+		public function destroyAllData(){
+			$this->templateSystem->destroyData();
+		}
+
+		public function setTitle($title){
+			$this->templateSystem->setTitle($title);
+		}
+
+		public function setLoggedUser($user){
+			$this->templateSystem->setLoggedUser($user);
+		} 
+
+		public function getLoggedUser($index = null){
+			return $this->templateSystem->getLoggedUser($index);
+		}
+
+		public function authorizedToAccess($method, $methods, $user){
+			if(!empty($user)){
 				return true;
 			}
 			else{
@@ -34,33 +70,6 @@
 	        return true;
 	      }
 	      return false;
-	    }
-
-	   	public function serializeData($data){
-	   		if(is_array($data)){
-	   			if($this->saveData($data)){
-	   				return true;
-	   			}
-	   			return false;
-	   		}
-	   		return false;
-	    }
-
-	    public function save($connection, $table, $values){
-	    	$columns = array();
-	    	$postValues = array();
-
-	    	foreach($values as $index => $value){
-	    		array_push($columns, strtoupper($index));
-	    		array_push($postValues, replace($_POST[$index]));
-	    	}
-
-	    	$saved = $connection->insert($table, $columns, $postValues);
-
-	    	if(!empty($saved)){
-	    		return true;
-	    	}
-	    	return false;
 	    }
 	}
 ?>

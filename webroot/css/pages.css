@@ -83,6 +83,10 @@ label{
 	border-radius: 4px;
 	padding-top: 15px;
 }
+#form-login #logo{
+	text-align: center; 
+	margin-bottom: 15px;
+}
 #send-file-content{
 	box-shadow: 1.5px 1.5px 6px 1px gray;
 	background-color: white;
@@ -194,4 +198,18 @@ ul.navbar-left li a:visited,
 	background-color: #00314b;
 	padding: 10px 10px 10px 10px;
 	color: white;
+}
+#debug{
+	background-color: #FFD700; 
+	font-size: 1em; 
+	color: black; 
+}
+#message-box.form-group{
+	margin-bottom: 0;
+}
+#message-box .error{
+	position: relative;
+	top: -10px;
+	color: #c94442;
+	font-size: 1.1em;
 }

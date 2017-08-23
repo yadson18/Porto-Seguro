@@ -1,6 +1,6 @@
-<div class="container-fluid" id="send-file">
+<div class="container-fluid col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-xs-12" id="send-file">
     <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12" id="message">
-        <?= Flash::showMessage() ?>
+        <?= $this->flashShowMessage() ?>
     </div>
     <div id="send-file-content" class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12">
         <p id="send-file-header">
@@ -29,8 +29,11 @@
                     </span>
                 </div>
             </div>
+            <div id="message-box" class="form-group">
+                <i><p class="error"></p></i>
+            </div>
             <div class="form-group">
-                <button class="form-control btn btn-success input-lg" id="send-file-btn" type="submit">
+                <button class="form-control btn btn-success input-lg" id="send-file-btn">
                     Enviar <i class="fa fa-upload" aria-hidden="true"></i>
                 </button>
             </div>

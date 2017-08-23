@@ -1,22 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<title>AverbePorto - <?= $this_->getData("Title") ?></title>
-		<link rel="icon" type="image/x-icon" href="/webroot/images/logo-icone.jpg">
+		<title>AverbePorto - <?= $this->getTitle() ?></title>
+		<link rel="icon" type="image/x-icon" href="/images/logo-icone.jpg">
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<?= $this_->css("bootstrap.min.css") ?>
-		<?= $this_->css("pages.css") ?>
-		<?= $this_->css("font-awesome.min.css") ?>
+		<?= $this->css("bootstrap.min.css") ?>
+		<?= $this->css("pages.css") ?>
+		<?= $this->css("font-awesome.min.css") ?>
 
-		<?= $this_->script("jquery-3.2.1.min.js") ?>
-		<?= $this_->script("jquery.price_format.min.js") ?>
-		<?= $this_->script("inputMask.js") ?>
-		<?= $this_->script("bootstrap.min.js") ?>
-		<?= $this_->script("pages.js") ?>
+		<?= $this->script("jquery-3.2.1.min.js") ?>
+		<?= $this->script("bootstrap.min.js") ?>
+		<?= $this->script("pages.js") ?>
 	</head>
 	<body>
-		<?php if($this_->getData("Title") != "Login"): ?>
+		<?php if($this->getLoggedUser() && $this->getTitle() != "Login"): ?>
 			<nav class="navbar navbar-default" id="menu">
 	  			<div class="container-fluid">
 		    		<div class="navbar-header">
@@ -27,7 +25,7 @@
 					        <span class="icon-bar"></span>
 				      	</button>
 				      	<a class="navbar-brand" href="#">
-				      		<img src="/webroot/images/logo.gif">
+				      		<img src="/images/logo.gif">
 				      	</a>
 				    </div>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -44,7 +42,7 @@
 	        				</li>
 	        				<li class="dropdown">
 					          	<a href="#" class="dropdown-toggle text-capitalize" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					          		<?= strtolower($this_->getData('User')['name']) ?> 
+					          		<?= strtolower($this->getLoggedUser("name")) ?> 
 					          		<i class="fa fa-caret-down" aria-hidden="true"></i>
 					          	</a>
 					          	<ul class="dropdown-menu">
@@ -83,12 +81,8 @@
 	  			</div>
 			</nav>
 		<?php endif; ?>
-		<?php if($this_->getData("Title") != "Login"): ?>
-			<div id="content" class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-xs-12">
-		<?php else: ?>
-			<div id="content">
-		<?php endif; ?>
-				<?= $this_->fetchAll() ?>
-			</div>
+		<div id="content">
+			<?= $this->fetchAll() ?>
+		</div>
 	</body>
 </html>
